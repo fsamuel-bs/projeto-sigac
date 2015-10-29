@@ -1,12 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-              android:id="@+id/screening_text_view"
-              android:layout_width="10dp"
-              android:layout_height="10dp"
-              android:gravity="center" />
+    <TextView
+        android:id="@+id/victim_id"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:text="ID:"/>
+
+    <TextView
+        android:id="@+id/id_field"
+        android:layout_alignBottom="@id/victim_id"
+        android:layout_toRightOf="@id/victim_id"
+        android:layout_marginLeft="10dp"
+        android:layout_width="100dp"
+        android:layout_height="20dp"/>
+
+    <TextView
+        android:id="@+id/victim_sex"
+        android:layout_below="@id/victim_id"
+        android:layout_alignParentLeft="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:text="ID:"/>
+
+    <!--<Button-->
+        <!--android:id="@+id/button_sex_male"/>-->
 
 </RelativeLayout>

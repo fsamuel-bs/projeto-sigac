@@ -15,8 +15,7 @@ public class ScreeningFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.screening_fragment, container, false);
         TextView textView = (TextView) view.findViewById(R.id.screening_text_view);
         textView.setText("Fragment #" + 1);
