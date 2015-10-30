@@ -12,6 +12,7 @@ public class MainFragmentPageAdapter extends FragmentPagerAdapter {
     private static Object[][] TABS = {
             {"Screening", ScreeningFragment.class},
             {"Search", SearchFragment.class},
+            {"Victim", VictimFragment.class}
     };
 
     private Context mContext;
