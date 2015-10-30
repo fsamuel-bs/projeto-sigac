@@ -39,7 +39,10 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Incident ID"
-                android:inputType="text" />
+                android:inputType="text"
+                android:enabled="false"
+                android:textColor="#FF666666"
+                />
 
             <Button
                 android:id="@+id/search_incident_button"
@@ -55,7 +58,7 @@
             android:id="@+id/search_incident_title"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Incident"
+            android:text="List of victims"
             android:layout_marginTop="10dp"
             android:gravity="center"
             />
