@@ -134,7 +134,7 @@
             android:id="@+id/button_injured"
             android:layout_toRightOf="@id/button_safe"
             android:layout_centerInParent="true"
-            android:layout_width="80dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:text="Injured"/>
         <Button
