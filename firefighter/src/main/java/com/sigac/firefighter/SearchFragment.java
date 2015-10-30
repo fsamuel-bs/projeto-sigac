@@ -1,7 +1,9 @@
 package com.sigac.firefighter;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,11 +24,15 @@ public class SearchFragment extends Fragment {
     private ArrayAdapter<VictimItem> mAdapter;
     private ObservableModelManager mModelManager;
 
+    private Context mContext;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mModelManager = ObservableModelManager.Factory.get();
         mModelManager.addObserver(mObserver);
+
+        mContext = getActivity();
     }
 
     private ObservableModelManager.Observer mObserver = new ObservableModelManager.Observer() {
@@ -62,7 +68,12 @@ public class SearchFragment extends Fragment {
 
         @Override
         protected void onPreExecute() {
-            mAdapter.add(new VictimItem("Loading..."));
+            new Handler(mContext.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter.add(new VictimItem("Loading..."));
+                }
+            });
         }
 
         @Override
@@ -83,9 +94,14 @@ public class SearchFragment extends Fragment {
         }
 
         @Override
-        protected void onPostExecute(List<VictimItem> victimItems) {
+        protected void onPostExecute(final List<VictimItem> victimItems) {
             mAdapter.clear();
-            mAdapter.addAll(victimItems);
+            new Handler(mContext.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    mAdapter.addAll(victimItems);
+                }
+            });
             mAdapter.notifyDataSetChanged();
         }
     }

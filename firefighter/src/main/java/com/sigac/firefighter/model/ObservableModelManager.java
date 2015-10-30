@@ -10,7 +10,7 @@ public interface ObservableModelManager extends ModelManager {
 
     public static class Factory {
         public static ObservableModelManager get() {
-            return MemoryMockModelManager.getInstance();
+            return ApiModelManager.getInstance();
         }
     }
 }

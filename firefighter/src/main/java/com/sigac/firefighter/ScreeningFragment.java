@@ -1,13 +1,17 @@
 package com.sigac.firefighter;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.*;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.sigac.firefighter.model.ObservableModelManager;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 // TODO: Save buttons state when pressed, there is no way to tell the gender of the current victim being created!
@@ -138,13 +142,21 @@ public class ScreeningFragment extends Fragment {
             public void onClick(View v) {
                 mVictim.setId(Integer.parseInt(mIdField.getText().toString(), 16));
                 mVictim.setName(mVictimName.getText().toString());
-                mModelManager.persistVictim(mVictim);
+                new PersistVictimsTask().execute();
                 mIdField.setText(Integer.toString(randomId(), 16));
                 mVictim = new Victim();
             }
         });
 
         return view;
+    }
+
+    private class PersistVictimsTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            mModelManager.persistVictim(mVictim);
+            return null;
+        }
     }
 
     // TODO: REMOVE THIS!!!

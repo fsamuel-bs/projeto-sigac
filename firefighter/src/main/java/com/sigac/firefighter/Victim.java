@@ -1,17 +1,17 @@
 package com.sigac.firefighter;
 
 /*
-create table victims(mId int not null, mState int not null, mSex int, mAge int, mName varchar(30), mOccurrenceId int );
-insert into victims values(mId, mState, mSex, mAge, mName, mOccurrenceId);
+create table victims(id int not null, state int not null, sex int, age int, name varchar(30), occurrence_id int );
+insert into victims values(id, state, sex, age, name, occurrence_id);
 
  VICTIM
-    mId int
-    mSex int   { MALE, FEMALE }
-    mAge int   { CHILD, YOUNG, ADULT, OLD }
-    mState int { GREEN, YELLOW, RED, BLACK }
+    id int
+    sex int   { MALE, FEMALE }
+    age int   { CHILD, YOUNG, ADULT, OLD }
+    state int { GREEN, YELLOW, RED, BLACK }
 
-    mName string
-    mOccurrenceId
+    name string
+    occurrence_id
 */
 
 import com.google.gson.annotations.SerializedName;
@@ -73,90 +73,90 @@ public class Victim {
         }
     }
 
-    private int mId;
-    private Sex mSex;
-    private Age mAge;
-    private State mState;
+    private int id;
+    private Sex sex;
+    private Age age;
+    private State state;
 
-    private String mName;
-    private int mOccurrenceId;
+    private String name;
+    private int occurrence_id;
 
     public Victim() {
-        mAge = Age.CHILD;
-        mOccurrenceId = 0;
-        mName = "";
-        mState = State.GREEN;
-        mSex = Sex.MALE;
-        mId = 0;
+        age = Age.CHILD;
+        occurrence_id = 0;
+        name = "";
+        state = State.GREEN;
+        sex = Sex.MALE;
+        id = 0;
     }
 
     public Victim(int id, State state, Sex sex, Age age, String name, int occurrence_id) {
-        mAge = age;
-        mOccurrenceId = occurrence_id;
-        mName = name;
-        mState = state;
-        mSex = sex;
-        mId = id;
+        this.age = age;
+        this.occurrence_id = occurrence_id;
+        this.name = name;
+        this.state = state;
+        this.sex = sex;
+        this.id = id;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("ID: " + mId + "\n");
-        sb.append("State:" + mState + "\n");
-        sb.append("Sex:" + mSex + "\n");
-        sb.append("Name:" + mName + "\n");
-        sb.append("OccurrenceId:" + mOccurrenceId + "\n");
+        sb.append("ID: " + id + "\n");
+        sb.append("State:" + state + "\n");
+        sb.append("Sex:" + sex + "\n");
+        sb.append("Name:" + name + "\n");
+        sb.append("OccurrenceId:" + occurrence_id + "\n");
 
         return sb.toString();
     }
 
     public int getId() {
-        return mId;
+        return id;
     }
 
     public void setId(int id) {
-        this.mId = id;
+        this.id = id;
     }
 
     public Sex getSex() {
-        return mSex;
+        return sex;
     }
 
     public void setSex(Sex sex) {
-        this.mSex = sex;
+        this.sex = sex;
     }
 
     public Age getAge() {
-        return mAge;
+        return age;
     }
 
     public void setAge(Age age) {
-        this.mAge = age;
+        this.age = age;
     }
 
     public State getState() {
-        return mState;
+        return state;
     }
 
     public void setState(State state) {
-        this.mState = state;
+        this.state = state;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        this.mName = name;
+        this.name = name;
     }
 
-    public int getOccurrenceId() {
-        return mOccurrenceId;
+    public int getOccurrence_id() {
+        return occurrence_id;
     }
 
     public void setOccurrence_id(int occurrence_id) {
-        this.mOccurrenceId = occurrence_id;
+        this.occurrence_id = occurrence_id;
     }
 }

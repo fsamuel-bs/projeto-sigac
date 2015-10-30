@@ -1,5 +1,6 @@
 package com.sigac.firefighter.model;
 
+import android.util.Log;
 import com.google.common.base.Throwables;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -50,7 +51,7 @@ public class ApiModelManager extends BaseModelManager {
         String insertQuery = String.format("insert into victims (id, state, sex, age, name, occurrence_id) " +
                         "values (%d, %d, %d, %d, \'%s\', %d);",
                 victim.getId(), victim.getState().ordinal(), victim.getSex().ordinal(),
-                victim.getAge().ordinal(), victim.getName(), victim.getOccurrenceId());
+                victim.getAge().ordinal(), victim.getName(), victim.getOccurrence_id());
 
         insertQuery = insertQuery.replaceAll("'", "%27");
         insertQuery = insertQuery.replaceAll(" ", "%20");
