@@ -4,10 +4,10 @@
     <string name="hello_world">Hello world!</string>
 
     <string-array name="victim_priorities">
-        <item>Safe</item>
-        <item>Injured</item>
-        <item>Severe</item>
-        <item>Dead</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Red</item>
+        <item>Black</item>
     </string-array>
 
     <string-array name="victim_sex">
