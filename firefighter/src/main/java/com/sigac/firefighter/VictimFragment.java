@@ -13,8 +13,9 @@ import com.sigac.firefighter.model.ObservableModelManager;
 
 public class VictimFragment extends Fragment {
 
-    private View vVictimId;
+    private EditText vVictimName;
     private Spinner vVictimSex;
+    private EditText vVictimIdQuery;
     private Spinner vVictimPriority;
     private EditText vVictimComment;
 
@@ -31,7 +32,8 @@ public class VictimFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.victim_fragment, container, false);
-        vVictimId = (EditText) view.findViewById(R.id.victim_id);
+        vVictimName = (EditText) view.findViewById(R.id.victim_name);
+        vVictimIdQuery = (EditText) view.findViewById(R.id.victim_id_query);
         vVictimComment = (EditText) view.findViewById(R.id.victim_comment);
 
         vVictimSex = (Spinner) view.findViewById(R.id.victim_sex);
@@ -53,12 +55,13 @@ public class VictimFragment extends Fragment {
 
     public void selectVictim(Victim victim) {
         /* TODO: Name? */
-        vVictimId.setId(victim.getId());
+        vVictimName.setText(victim.getName());
+        vVictimIdQuery.setText(Integer.toString(victim.getId(), 16));
 
         /* TODO: LOL! It's 7 am! */
         for (int i = 0; i < mVictimSexAdapter.getCount(); i++) {
             String sex = (String) mVictimSexAdapter.getItem(i);
-            if (victim.getSex().toString().toLowerCase().equals(sex)) {
+            if (victim.getSex().toString().toLowerCase().equals(sex.toLowerCase())) {
                 vVictimSex.setSelection(i);
                 break;
             }
@@ -67,10 +70,12 @@ public class VictimFragment extends Fragment {
         /* TODO: Plz */
         for (int i = 0; i < mVictimPriorityAdapter.getCount(); i++) {
             String priority = (String) mVictimPriorityAdapter.getItem(i);
-            if (victim.getState().toString().toLowerCase().equals(priority)) {
+            if (victim.getState().toString().toLowerCase().equals(priority.toLowerCase())) {
                 vVictimPriority.setSelection(i);
                 break;
             }
         }
+
+        vVictimComment.setText("Age: " + victim.getAge().toString());
     }
 }

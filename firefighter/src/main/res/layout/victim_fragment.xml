@@ -34,7 +34,7 @@
                 />
 
             <EditText
-                android:id="@+id/victim_query"
+                android:id="@+id/victim_id_query"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -68,7 +68,7 @@
                 >
 
                 <TextView
-                    android:text="ID:"
+                    android:text="Name:"
                     style="@style/VictimFormLabel"
                     />
 
@@ -98,10 +98,11 @@
                 >
 
                 <EditText
-                    android:id="@+id/victim_id"
+                    android:id="@+id/victim_name"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:enabled="false"
+                    android:textColor="#FF444444"
                     android:text="ID:"
                     />
 
@@ -126,7 +127,7 @@
                     android:maxLines="10"
                     android:layout_width="match_parent"
                     android:layout_height="125dp"
-                    android:text="Commentgit "
+                    android:text="Extremely injured?"
                     />
 
             </LinearLayout>
