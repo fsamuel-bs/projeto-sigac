@@ -11,6 +11,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+import com.sigac.firefighter.model.ModelManager;
+import com.sigac.firefighter.model.ObservableModelManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,11 +21,21 @@ public class SearchFragment extends Fragment {
 
     private ListView vVictimsList;
     private ArrayAdapter<VictimItem> mAdapter;
+    private ObservableModelManager mModelManager;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mModelManager = ObservableModelManager.Factory.get();
+        mModelManager.addObserver(mObserver);
     }
+
+    private ObservableModelManager.Observer mObserver = new ObservableModelManager.Observer() {
+        @Override
+        public void onChange(ModelManager m) {
+            new FetchVictimsTask().execute();
+        }
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -56,7 +68,7 @@ public class SearchFragment extends Fragment {
         protected List<VictimItem> doInBackground(Void... params) {
             List<Victim> victims;
             try {
-                victims = DbUtil.getVictims();
+                victims = mModelManager.getVictims();
             } catch (Exception e) {
                 Log.e("SIGAC", "Error " + e.getMessage(), e);
                 return new ArrayList<>();

@@ -33,7 +33,6 @@ public class VictimFragment extends Fragment {
                 android.R.layout.simple_spinner_item);
         vVictimSex.setAdapter(mVictimSexAdapter);
 
-
         vVictimPriority = (Spinner) view.findViewById(R.id.victim_priority);
         mVictimPriorityAdapter = ArrayAdapter.createFromResource(
                 getActivity(),

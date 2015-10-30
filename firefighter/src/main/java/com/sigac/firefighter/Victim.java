@@ -16,6 +16,7 @@ insert into victims values(mId, mState, mSex, mAge, mName, mOccurrenceId);
 
 import com.google.gson.annotations.SerializedName;
 
+// TODO: Implement parcelable
 public class Victim {
 
     public enum Sex {

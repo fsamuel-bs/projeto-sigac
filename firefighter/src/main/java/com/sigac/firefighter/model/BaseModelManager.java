@@ -1,10 +1,11 @@
 package com.sigac.firefighter.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public abstract class BaseModelManager implements ObservableModelManager {
 
-    private List<Observer> mObservers;
+    private List<Observer> mObservers = new LinkedList<>();
 
     public void addObserver(Observer observer) {
         mObservers.add(observer);

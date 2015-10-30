@@ -2,13 +2,15 @@ package com.sigac.firefighter;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
+import android.view.*;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import com.sigac.firefighter.model.ObservableModelManager;
 
+import java.util.Random;
+
+// TODO: Save buttons state when pressed, there is no way to tell the gender of the current victim being created!
 public class ScreeningFragment extends Fragment {
 
     private TextView mIdTextView;
@@ -30,10 +32,14 @@ public class ScreeningFragment extends Fragment {
 
     private Victim mVictim;
 
+    private ObservableModelManager mModelManager;
+    private EditText mVictimName;
+    private TextView mIdField;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        mModelManager = ObservableModelManager.Factory.get();
         mVictim = new Victim();
     }
 
@@ -41,105 +47,112 @@ public class ScreeningFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.screening_fragment, container, false);
 
+        mIdField = (TextView) view.findViewById(R.id.id_field);
+        mIdField.setText(Integer.toString(randomId(), 16));
+
+        mVictimName = (EditText) view.findViewById(R.id.victim_name);
+
         mMaleButton = (Button) view.findViewById(R.id.button_male);
-        mMaleButton.setOnTouchListener(new View.OnTouchListener() {
+        mMaleButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setSex(Victim.Sex.MALE);
-                return true;
             }
         });
 
         mFemaleButton = (Button) view.findViewById(R.id.button_female);
-        mFemaleButton.setOnTouchListener(new View.OnTouchListener() {
+        mFemaleButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setSex(Victim.Sex.FEMALE);
-                return true;
             }
         });
 
         mChildButton = (Button) view.findViewById(R.id.button_child);
-        mChildButton.setOnTouchListener(new View.OnTouchListener() {
+        mChildButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setAge(Victim.Age.CHILD);
-                return true;
             }
         });
 
         mYoungButton = (Button) view.findViewById(R.id.button_young);
-        mYoungButton.setOnTouchListener(new View.OnTouchListener() {
+        mYoungButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setAge(Victim.Age.YOUNG);
-                return true;
             }
         });
 
         mAdultButton = (Button) view.findViewById(R.id.button_adult);
-        mAdultButton.setOnTouchListener(new View.OnTouchListener() {
+        mAdultButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setAge(Victim.Age.ADULT);
-                return true;
             }
         });
 
         mOldButton = (Button) view.findViewById(R.id.button_old);
-        mOldButton.setOnTouchListener(new View.OnTouchListener() {
+        mOldButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setAge(Victim.Age.OLD);
-                return true;
             }
         });
 
         mSafeButton = (Button) view.findViewById(R.id.button_safe);
-        mSafeButton.setOnTouchListener(new View.OnTouchListener() {
+        mSafeButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setState(Victim.State.GREEN);
-                return true;
             }
         });
 
         mInjuredbutton = (Button) view.findViewById(R.id.button_injured);
-        mInjuredbutton.setOnTouchListener(new View.OnTouchListener() {
+        mInjuredbutton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setState(Victim.State.YELLOW);
-                return true;
             }
         });
 
         mSevereButton = (Button) view.findViewById(R.id.button_severe);
-        mSevereButton.setOnTouchListener(new View.OnTouchListener() {
+        mSevereButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setState(Victim.State.RED);
-                return true;
             }
         });
 
         mDeadButton = (Button) view.findViewById(R.id.button_dead);
-        mDeadButton .setOnTouchListener(new View.OnTouchListener() {
+        mDeadButton .setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
+            public void onClick(View v) {
                 mVictim.setState(Victim.State.BLACK);
-                return true;
             }
         });
 
         mSubmitButton = (Button) view.findViewById(R.id.submit_button);
-        mSubmitButton.setOnTouchListener(new View.OnTouchListener() {
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                DbUtil.persistVictim(mVictim);
-                return true;
+            public void onClick(View v) {
+                mVictim.setId(Integer.parseInt(mIdField.getText().toString(), 16));
+                mVictim.setName(mVictimName.getText().toString());
+                mModelManager.persistVictim(mVictim);
+                mIdField.setText(Integer.toString(randomId(), 16));
+                mVictim = new Victim();
             }
         });
 
         return view;
+    }
+
+    // TODO: REMOVE THIS!!!
+    // TODO: REMOVE THIS!!!
+    // TODO: REMOVE THIS!!!
+    private static Random RANDOM = new Random();
+
+    private static int randomId() {
+        return RANDOM.nextInt();
     }
 }
