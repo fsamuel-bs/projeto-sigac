@@ -80,6 +80,15 @@ public class Victim {
     private String mName;
     private int mOccurrenceId;
 
+    public Victim() {
+        mAge = Age.CHILD;
+        mOccurrenceId = 0;
+        mName = "";
+        mState = State.GREEN;
+        mSex = Sex.MALE;
+        mId = 0;
+    }
+
     public Victim(int id, State state, Sex sex, Age age, String name, int occurrence_id) {
         mAge = age;
         mOccurrenceId = occurrence_id;
