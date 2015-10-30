@@ -1,8 +1,9 @@
-package com.sigac.firefighter;
+package com.sigac.firefighter.model;
 
 import com.google.common.base.Throwables;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.sigac.firefighter.Victim;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,13 +13,26 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
-public class DbUtil {
+public class ApiModelManager extends BaseModelManager {
 
-    public static void deleteVictim(String id) {
-        httpQuery("delete%20from%20victims%20where%20id=" + id);
+    private static class InstanceHolder {
+        private static final ApiModelManager INSTANCE = new ApiModelManager();
     }
 
-    public static List<Victim> getVictims() throws Exception  {
+    public static ApiModelManager getInstance() {
+        return InstanceHolder.INSTANCE;
+    }
+
+    private ApiModelManager() {
+       /* Prevents outside instantiation */
+    }
+
+    public void deleteVictim(String id) {
+        httpQuery("delete%20from%20victims%20where%20id=" + id);
+        notifyObservers();
+    }
+
+    public List<Victim> getVictims() throws Exception  {
         String lookupQuery = "select%20*%20from%20victims";
         String ret;
 
@@ -31,7 +45,7 @@ public class DbUtil {
         return victims;
     }
 
-    public static void persistVictim(Victim victim) {
+    public void persistVictim(Victim victim) {
         //insert into victims values(id, state, sex, age, name, occurrence_id);
         String insertQuery = String.format("insert into victims (id, state, sex, age, name, occurrence_id) " +
                         "values (%d, %d, %d, %d, \'%s\', %d);",
@@ -42,9 +56,11 @@ public class DbUtil {
         insertQuery = insertQuery.replaceAll(" ", "%20");
 
         String ret = httpQuery(insertQuery);
+
+        notifyObservers();
     }
 
-    public static String httpQuery(String query) {
+    public String httpQuery(String query) {
         try {
             URL yahoo = new URL("http://powerful-forest-9086.herokuapp.com/?q=" + query);
             URLConnection yc = yahoo.openConnection();
