@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 import com.sigac.firefighter.model.ModelManager;
 import com.sigac.firefighter.model.ObservableModelManager;
 
@@ -56,7 +55,6 @@ public class SearchFragment extends Fragment {
             /* TODO: Ugliest thing ever, plz refactor */
             MainActivity main = (MainActivity) getActivity();
             main.goToVictim(item.victim);
-            Toast.makeText(getActivity(), item.name, Toast.LENGTH_LONG).show();
         }
     };
 
