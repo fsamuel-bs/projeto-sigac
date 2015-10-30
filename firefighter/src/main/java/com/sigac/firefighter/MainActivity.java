@@ -7,17 +7,30 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ViewPager mViewPager;
+    private TabLayout mTabLayout;
+    private MainFragmentPageAdapter mAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ViewPager viewPager = (ViewPager) findViewById(R.id.viewpager);
-        viewPager.setAdapter(new MainFragmentPageAdapter(getSupportFragmentManager(),
-                MainActivity.this));
+        mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        mAdapter = new MainFragmentPageAdapter(getSupportFragmentManager(), this);
+        mViewPager.setAdapter(mAdapter);
 
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        mTabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        mTabLayout.setupWithViewPager(mViewPager);
 
+
+
+    }
+
+    /* TODO: LOL */
+    public void goToVictim(Victim victim) {
+        mViewPager.setCurrentItem(MainFragmentPageAdapter.VICTIM_TAB_INDEX);
+        VictimFragment fragment = (VictimFragment) mAdapter.getItem(MainFragmentPageAdapter.VICTIM_TAB_INDEX);
+        fragment.selectVictim(victim);
     }
 }

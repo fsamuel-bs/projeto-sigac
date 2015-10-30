@@ -26,12 +26,6 @@
             android:layout_height="20dp"
             android:enabled="false"
             android:textColor="#FF555555"/>
-        <Button
-            android:id="@+id/button_refresh"
-            android:layout_toRightOf="@id/id_field"
-            android:layout_centerVertical="true"
-            android:layout_width="40dp"
-            android:layout_height="40dp"/>
 
     </RelativeLayout>
 

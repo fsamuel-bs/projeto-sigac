@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import com.sigac.firefighter.model.ObservableModelManager;
 
 public class VictimFragment extends Fragment {
 
@@ -16,10 +17,17 @@ public class VictimFragment extends Fragment {
     private Spinner vVictimSex;
     private Spinner vVictimPriority;
     private EditText vVictimComment;
+
     private ArrayAdapter<CharSequence> mVictimPriorityAdapter;
     private ArrayAdapter<CharSequence> mVictimSexAdapter;
+    private ObservableModelManager mModelManager;
 
-    @Nullable
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        mModelManager = ObservableModelManager.Factory.get();
+        super.onCreate(savedInstanceState);
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(R.layout.victim_fragment, container, false);
@@ -41,5 +49,28 @@ public class VictimFragment extends Fragment {
         vVictimPriority.setAdapter(mVictimPriorityAdapter);
 
         return view;
+    }
+
+    public void selectVictim(Victim victim) {
+        /* TODO: Name? */
+        vVictimId.setId(victim.getId());
+
+        /* TODO: LOL! It's 7 am! */
+        for (int i = 0; i < mVictimSexAdapter.getCount(); i++) {
+            String sex = (String) mVictimSexAdapter.getItem(i);
+            if (victim.getSex().toString().toLowerCase().equals(sex)) {
+                vVictimSex.setSelection(i);
+                break;
+            }
+        }
+
+        /* TODO: Plz */
+        for (int i = 0; i < mVictimPriorityAdapter.getCount(); i++) {
+            String priority = (String) mVictimPriorityAdapter.getItem(i);
+            if (victim.getState().toString().toLowerCase().equals(priority)) {
+                vVictimPriority.setSelection(i);
+                break;
+            }
+        }
     }
 }

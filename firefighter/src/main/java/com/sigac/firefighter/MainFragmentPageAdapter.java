@@ -4,15 +4,17 @@ import android.content.Context;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import com.google.common.base.Throwables;
 
 public class MainFragmentPageAdapter extends FragmentPagerAdapter {
 
-    // Who needs types? :P
+    /* TODO: So ugly, but at least we don't have magical numbers flying around */
+    public static int VICTIM_TAB_INDEX = 2;
+
+    /* TODO: Who needs types? :P */
     private static Object[][] TABS = {
-            {"Screening", ScreeningFragment.class},
-            {"Search", SearchFragment.class},
-            {"Victim", VictimFragment.class}
+            {"Screening", new ScreeningFragment()},
+            {"Search", new SearchFragment()},
+            {"Victim", new VictimFragment()}
     };
 
     private Context mContext;
@@ -29,13 +31,7 @@ public class MainFragmentPageAdapter extends FragmentPagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        @SuppressWarnings("unchecked")
-        Class<? extends Fragment> klass = (Class<? extends Fragment>) TABS[position][1];
-        try {
-            return klass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw Throwables.propagate(e);
-        }
+        return (Fragment) TABS[position][1];
     }
 
     @Override
