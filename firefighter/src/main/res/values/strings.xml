@@ -1,7 +1,8 @@
 <resources>
 
-    <string name="app_name">SigacFirefighter</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="app_name">Firefighter</string>
+
+    <string name="underlined_placeholder"><u>            </u></string>
 
     <string-array name="victim_priorities">
         <item>Green</item>

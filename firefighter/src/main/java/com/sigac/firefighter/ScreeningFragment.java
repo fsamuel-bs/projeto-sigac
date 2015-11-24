@@ -1,5 +1,6 @@
 package com.sigac.firefighter;
 
+import android.graphics.Paint;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -52,6 +53,7 @@ public class ScreeningFragment extends Fragment {
         View view = inflater.inflate(R.layout.screening_fragment, container, false);
 
         mIdField = (TextView) view.findViewById(R.id.id_field);
+        mIdField.setPaintFlags(mIdField.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         mIdField.setText(Integer.toString(randomId(), 16));
 
         mVictimName = (EditText) view.findViewById(R.id.victim_name);
