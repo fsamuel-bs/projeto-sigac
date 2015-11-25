@@ -13,8 +13,8 @@ public class Util {
             modelManager.deleteVictim("0");
             modelManager.deleteVictim("1");
 
-            modelManager.persistVictim(new Victim("0", "", Victim.Sex.MALE, Victim.Age.YOUNG, Victim.State.BLACK ));
-            modelManager.persistVictim(new Victim("1", "", Victim.Sex.MALE, Victim.Age.ADULT, Victim.State.GREEN));
+            modelManager.persistVictim(new Victim("0", "", Victim.Sex.MALE, Victim.Age.YOUNG, Victim.Status.BLACK ));
+            modelManager.persistVictim(new Victim("1", "", Victim.Sex.MALE, Victim.Age.ADULT, Victim.Status.GREEN));
 
             List<Victim> victims = modelManager.getVictims();
             System.out.println(victims.toString());

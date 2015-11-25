@@ -146,35 +146,35 @@ public class ScreeningFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 mStateGroup.selectButton(mSafeButton);
-                mVictim.setState(Victim.State.GREEN);
+                mVictim.setStatus(Victim.Status.GREEN);
             }
         });
         mInjuredButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mStateGroup.selectButton(mInjuredButton);
-                mVictim.setState(Victim.State.YELLOW);
+                mVictim.setStatus(Victim.Status.YELLOW);
             }
         });
         mSevereButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mStateGroup.selectButton(mSevereButton);
-                mVictim.setState(Victim.State.RED);
+                mVictim.setStatus(Victim.Status.RED);
             }
         });
         mDeadButton .setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mStateGroup.selectButton(mDeadButton);
-                mVictim.setState(Victim.State.BLACK);
+                mVictim.setStatus(Victim.Status.BLACK);
             }
         });
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mVictim.setId(mIdField.getText().toString());
+                mVictim.setToken(mIdField.getText().toString());
                 mVictim.setName(mVictimName.getText().toString());
                 new PersistVictimsTask().execute();
                 clear();

@@ -41,7 +41,7 @@ public class Victim {
         }
     }
 
-    public enum State {
+    public enum Status {
         @SerializedName("0")
         GREEN(0),
 
@@ -56,53 +56,53 @@ public class Victim {
 
         private final int value;
 
-        State (int value) {
+        Status(int value) {
             this.value = value;
         }
     }
 
-    private String id;
+    private String token;
     private String name;
 
     private Sex sex;
     private Age age;
-    private State state;
+    private Status status;
 
     public Victim() {
         age = Age.CHILD;
         name = "";
-        state = State.GREEN;
+        status = Status.GREEN;
         sex = Sex.MALE;
-        id = "0";
+        token = "0";
     }
 
-    public Victim(String id, String name, Sex sex, Age age, State state) {
-        this.id = id;
+    public Victim(String token, String name, Sex sex, Age age, Status status) {
+        this.token = token;
         this.name = name;
         this.sex = sex;
         this.age = age;
-        this.state = state;
+        this.status = status;
     }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("ID: " + id + "\n");
+        sb.append("ID: " + token + "\n");
         sb.append("Name:" + name + "\n");
         sb.append("Sex:" + sex + "\n");
         sb.append("Age:" + age + "\n");
-        sb.append("State:" + state + "\n");
+        sb.append("Status:" + status + "\n");
 
         return sb.toString();
     }
 
-    public String getId() {
-        return id;
+    public String getToken() {
+        return token;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public Sex getSex() {
@@ -121,12 +121,12 @@ public class Victim {
         this.age = age;
     }
 
-    public State getState() {
-        return state;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setState(State state) {
-        this.state = state;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 
     public String getName() {
@@ -141,11 +141,12 @@ public class Victim {
         @Override
         public JsonElement serialize(Victim victim, Type typeOfSrc, JsonSerializationContext context) {
             JsonObject result = new JsonObject();
-            result.add("id", new JsonPrimitive(victim.getId()));
+
+            result.add("token", new JsonPrimitive(victim.getToken()));
             result.add("name", new JsonPrimitive(victim.getName()));
             result.add("sex", new JsonPrimitive(victim.getSex().toString().toLowerCase()));
             result.add("age", new JsonPrimitive(victim.getAge().toString().toLowerCase()));
-            result.add("status", new JsonPrimitive(victim.getState().toString().toLowerCase()));
+            result.add("status", new JsonPrimitive(victim.getStatus().toString().toLowerCase()));
 
             return result;
 

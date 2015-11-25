@@ -120,7 +120,7 @@
         </RelativeLayout>
 
         <RelativeLayout
-            android:id="@+id/victim_state"
+            android:id="@+id/victim_status"
             android:layout_below="@id/victim_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -131,7 +131,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 style="@style/KeyLabel"
-                android:text="State:"/>
+                android:text="Status:"/>
             <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -165,8 +165,8 @@
 
         <Button
             android:id="@+id/submit_button"
-            android:layout_below="@id/victim_state"
-            android:layout_alignRight="@id/victim_state"
+            android:layout_below="@id/victim_status"
+            android:layout_alignRight="@id/victim_status"
             style="@style/ScreeningButton"
             android:text="Submit"/>
 

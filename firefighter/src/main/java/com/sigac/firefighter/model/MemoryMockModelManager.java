@@ -36,7 +36,7 @@ public class MemoryMockModelManager extends BaseModelManager {
 
     @Override
     public void persistVictim(Victim victim) {
-        mDatabase.put(String.valueOf(victim.getId()), victim);
+        mDatabase.put(String.valueOf(victim.getToken()), victim);
         notifyObservers();
     }
 

@@ -56,7 +56,7 @@ public class VictimFragment extends Fragment {
     public void selectVictim(Victim victim) {
         /* TODO: Name? */
         vVictimName.setText(victim.getName());
-        vVictimIdQuery.setText(victim.getId());
+        vVictimIdQuery.setText(victim.getToken());
 
         /* TODO: LOL! It's 7 am! */
         for (int i = 0; i < mVictimSexAdapter.getCount(); i++) {
@@ -70,7 +70,7 @@ public class VictimFragment extends Fragment {
         /* TODO: Plz */
         for (int i = 0; i < mVictimPriorityAdapter.getCount(); i++) {
             String priority = (String) mVictimPriorityAdapter.getItem(i);
-            if (victim.getState().toString().toLowerCase().equals(priority.toLowerCase())) {
+            if (victim.getStatus().toString().toLowerCase().equals(priority.toLowerCase())) {
                 vVictimPriority.setSelection(i);
                 break;
             }
