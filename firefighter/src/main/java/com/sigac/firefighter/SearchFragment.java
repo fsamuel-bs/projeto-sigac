@@ -82,7 +82,6 @@ public class SearchFragment extends Fragment {
             try {
                 victims = mModelManager.getVictims();
             } catch (Exception e) {
-                Log.e("SIGAC", "Error " + e.getMessage(), e);
                 return new ArrayList<>();
             }
             List<VictimItem> items = new ArrayList<>(victims.size());

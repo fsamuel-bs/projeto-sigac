@@ -50,7 +50,7 @@
                 android:id="@+id/button_update_tag"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/screening_button"/>
+                android:background="@drawable/deselected_screening_button"/>
         </LinearLayout>
 
         <RelativeLayout
