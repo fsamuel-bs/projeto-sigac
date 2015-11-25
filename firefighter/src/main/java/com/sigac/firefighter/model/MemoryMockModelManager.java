@@ -39,4 +39,9 @@ public class MemoryMockModelManager extends BaseModelManager {
         mDatabase.put(String.valueOf(victim.getId()), victim);
         notifyObservers();
     }
+
+    @Override
+    public String getTag() {
+        return "123";
+    }
 }

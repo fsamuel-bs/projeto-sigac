@@ -12,4 +12,5 @@ public interface ModelManager {
 
     public void persistVictim(Victim victim);
 
+    public String getTag();
 }

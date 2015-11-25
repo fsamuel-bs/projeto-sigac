@@ -1,27 +1,15 @@
 package com.sigac.firefighter;
 
-/*
-create table victims(id int not null, state int not null, sex int, age int, name varchar(30), occurrence_id int );
-insert into victims values(id, state, sex, age, name, occurrence_id);
-
- VICTIM
-    id int
-    sex int   { MALE, FEMALE }
-    age int   { CHILD, YOUNG, ADULT, OLD }
-    state int { GREEN, YELLOW, RED, BLACK }
-
-    name string
-    occurrence_id
-*/
-
+import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
+
+import java.lang.reflect.Type;
 
 // TODO: Implement parcelable
 public class Victim {
-
     public enum Sex {
         @SerializedName("0")
-        MALE (0),
+        MALE(0),
 
         @SerializedName("1")
         FEMALE(1);
@@ -73,30 +61,27 @@ public class Victim {
         }
     }
 
-    private int id;
+    private String id;
+    private String name;
+
     private Sex sex;
     private Age age;
     private State state;
 
-    private String name;
-    private int occurrence_id;
-
     public Victim() {
         age = Age.CHILD;
-        occurrence_id = 0;
         name = "";
         state = State.GREEN;
         sex = Sex.MALE;
-        id = 0;
+        id = "0";
     }
 
-    public Victim(int id, State state, Sex sex, Age age, String name, int occurrence_id) {
-        this.age = age;
-        this.occurrence_id = occurrence_id;
-        this.name = name;
-        this.state = state;
-        this.sex = sex;
+    public Victim(String id, String name, Sex sex, Age age, State state) {
         this.id = id;
+        this.name = name;
+        this.sex = sex;
+        this.age = age;
+        this.state = state;
     }
 
     @Override
@@ -104,19 +89,19 @@ public class Victim {
         StringBuilder sb = new StringBuilder();
 
         sb.append("ID: " + id + "\n");
-        sb.append("State:" + state + "\n");
-        sb.append("Sex:" + sex + "\n");
         sb.append("Name:" + name + "\n");
-        sb.append("OccurrenceId:" + occurrence_id + "\n");
+        sb.append("Sex:" + sex + "\n");
+        sb.append("Age:" + age + "\n");
+        sb.append("State:" + state + "\n");
 
         return sb.toString();
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -152,11 +137,18 @@ public class Victim {
         this.name = name;
     }
 
-    public int getOccurrence_id() {
-        return occurrence_id;
-    }
+    public static class Serializer implements JsonSerializer<Victim> {
+        @Override
+        public JsonElement serialize(Victim victim, Type typeOfSrc, JsonSerializationContext context) {
+            JsonObject result = new JsonObject();
+            result.add("id", new JsonPrimitive(victim.getId()));
+            result.add("name", new JsonPrimitive(victim.getName()));
+            result.add("sex", new JsonPrimitive(victim.getSex().toString()));
+            result.add("age", new JsonPrimitive(victim.getAge().toString()));
+            result.add("state", new JsonPrimitive(victim.getState().toString()));
 
-    public void setOccurrence_id(int occurrence_id) {
-        this.occurrence_id = occurrence_id;
+            return result;
+
+        }
     }
 }

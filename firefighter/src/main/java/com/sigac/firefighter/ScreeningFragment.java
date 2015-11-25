@@ -1,24 +1,18 @@
 package com.sigac.firefighter;
 
-import android.graphics.Paint;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.*;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.sigac.firefighter.model.ObservableModelManager;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 // TODO: Save buttons state when pressed, there is no way to tell the gender of the current victim being created!
 public class ScreeningFragment extends Fragment {
-
-    private TextView mIdTextView;
 
     private Button mMaleButton;
     private Button mFemaleButton;
@@ -38,14 +32,18 @@ public class ScreeningFragment extends Fragment {
     private Victim mVictim;
 
     private ObservableModelManager mModelManager;
-    private EditText mVictimName;
     private TextView mIdField;
+    private Button mUpdateIdButton;
+    private EditText mVictimName;
+
+    private Context mContext;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mModelManager = ObservableModelManager.Factory.get();
         mVictim = new Victim();
+        mContext = getActivity();
     }
 
     @Override
@@ -53,8 +51,15 @@ public class ScreeningFragment extends Fragment {
         View view = inflater.inflate(R.layout.screening_fragment, container, false);
 
         mIdField = (TextView) view.findViewById(R.id.id_field);
-        mIdField.setPaintFlags(mIdField.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        mIdField.setText(Integer.toString(randomId(), 16));
+        new GetTagTask().execute();
+
+        mUpdateIdButton = (Button) view.findViewById(R.id.button_update_tag);
+        mUpdateIdButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new GetTagTask().execute();
+            }
+        });
 
         mVictimName = (EditText) view.findViewById(R.id.victim_name);
 
@@ -142,15 +147,20 @@ public class ScreeningFragment extends Fragment {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mVictim.setId(Integer.parseInt(mIdField.getText().toString(), 16));
+                mVictim.setId(mIdField.getText().toString());
                 mVictim.setName(mVictimName.getText().toString());
                 new PersistVictimsTask().execute();
-                mIdField.setText(Integer.toString(randomId(), 16));
-                mVictim = new Victim();
+                clear();
             }
         });
 
         return view;
+    }
+
+    private void clear() {
+        mIdField.setText("");
+        mVictimName.setText("");
+        mVictim = new Victim();
     }
 
     private class PersistVictimsTask extends AsyncTask<Void, Void, Void> {
@@ -161,12 +171,17 @@ public class ScreeningFragment extends Fragment {
         }
     }
 
-    // TODO: REMOVE THIS!!!
-    // TODO: REMOVE THIS!!!
-    // TODO: REMOVE THIS!!!
-    private static Random RANDOM = new Random();
-
-    private static int randomId() {
-        return RANDOM.nextInt();
+    private class GetTagTask extends AsyncTask<Void, Void, Void> {
+        @Override
+        protected Void doInBackground(Void... params) {
+            final String tag = mModelManager.getTag();
+            new Handler(mContext.getMainLooper()).post(new Runnable() {
+                @Override
+                public void run() {
+                    mIdField.setText(tag);
+                }
+            });
+            return null;
+        }
     }
 }

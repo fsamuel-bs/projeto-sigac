@@ -56,7 +56,7 @@ public class VictimFragment extends Fragment {
     public void selectVictim(Victim victim) {
         /* TODO: Name? */
         vVictimName.setText(victim.getName());
-        vVictimIdQuery.setText(Integer.toString(victim.getId(), 16));
+        vVictimIdQuery.setText(victim.getId());
 
         /* TODO: LOL! It's 7 am! */
         for (int i = 0; i < mVictimSexAdapter.getCount(); i++) {

@@ -3,18 +3,24 @@ package com.sigac.firefighter.model;
 import android.util.Log;
 import com.google.common.base.Throwables;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sigac.firefighter.Victim;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.lang.reflect.Type;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.List;
 
 public class ApiModelManager extends BaseModelManager {
+
+    final static String StationPath = "http://192.168.1.2:1880/";
+    final static String DbPath = "http://powerful-forest-9086.herokuapp.com/?q= ";
 
     private static class InstanceHolder {
         private static final ApiModelManager INSTANCE = new ApiModelManager();
@@ -28,16 +34,17 @@ public class ApiModelManager extends BaseModelManager {
        /* Prevents outside instantiation */
     }
 
+    @Override
     public void deleteVictim(String id) {
-        httpQuery("delete%20from%20victims%20where%20id=" + id);
+        String query = "delete%20from%20victims%20where%20id=" + id;
+        getQuery(DbPath, query);
         notifyObservers();
     }
 
+    @Override
     public List<Victim> getVictims() throws Exception  {
-        String lookupQuery = "select%20*%20from%20victims";
-        String ret;
-
-        ret = httpQuery(lookupQuery);
+        String query = "select%20*%20from%20victims";
+        String ret = getQuery(DbPath, query);
 
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Victim>>(){}.getType();
@@ -46,37 +53,82 @@ public class ApiModelManager extends BaseModelManager {
         return victims;
     }
 
+    @Override
     public void persistVictim(Victim victim) {
-        //insert into victims values(id, state, sex, age, name, occurrence_id);
-        String insertQuery = String.format("insert into victims (id, state, sex, age, name, occurrence_id) " +
-                        "values (%d, %d, %d, %d, \'%s\', %d);",
-                victim.getId(), victim.getState().ordinal(), victim.getSex().ordinal(),
-                victim.getAge().ordinal(), victim.getName(), victim.getOccurrence_id());
-
-        insertQuery = insertQuery.replaceAll("'", "%27");
-        insertQuery = insertQuery.replaceAll(" ", "%20");
-
-        String ret = httpQuery(insertQuery);
-
+        Gson gson = new GsonBuilder().registerTypeAdapter(Victim.class, new Victim.Serializer()).create();
+        String victimObject = gson.toJson(victim);
+        Log.e("VICTIM", victimObject);
+        postQuery(StationPath, "victim", victimObject);
         notifyObservers();
     }
 
-    public String httpQuery(String query) {
-        try {
-            URL yahoo = new URL("http://powerful-forest-9086.herokuapp.com/?q=" + query);
-            URLConnection yc = yahoo.openConnection();
-            BufferedReader in = new BufferedReader(
-                    new InputStreamReader(
-                            yc.getInputStream()));
-            String inputLine;
-            inputLine = in.readLine();
-            in.close();
+    @Override
+    public String getTag() {
+        String responseJson = getQuery(StationPath, "gettag");
 
-            return inputLine;
-        } catch (IOException e) {
+        if (responseJson == null || responseJson.isEmpty()) {
+            return "";
+        }
+
+        try {
+            JSONObject tagObject = new JSONObject(responseJson);
+            if (tagObject.has("tag")) {
+                return tagObject.getString("tag");
+            }
+            return null;
+        } catch (JSONException e) {
             Throwables.propagate(e);
         }
 
         return null;
+    }
+
+    private String getQuery(String route, String query) {
+        BufferedReader in = null;
+        try {
+            URL url = new URL(route + query);;
+            URLConnection connection = url.openConnection();
+            in = new BufferedReader(
+                    new InputStreamReader(
+                            connection.getInputStream()));
+        } catch (IOException e) {
+            /* Silently fail if the server is not online */
+            e.printStackTrace();
+            return null;
+        }
+
+        try {
+            String inputLine = in.readLine();
+            in.close();
+
+            return inputLine;
+        }  catch (IOException e) {
+            Throwables.propagate(e);
+            return null;
+        }
+    }
+
+    private void postQuery(String route, String query, String payload) {
+        URL url = null;
+        try {
+            url = new URL(route + query);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
+            connection.setDoInput(true);
+            connection.setRequestProperty("Content-Type", "application/json");
+            connection.setRequestProperty("Accept", "application/json");
+            connection.setRequestMethod("POST");
+
+            OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
+            wr.write(payload);
+            wr.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

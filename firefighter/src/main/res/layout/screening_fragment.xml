@@ -11,46 +11,51 @@
         android:layout_marginLeft="20dp">
 
         <LinearLayout
-            android:id="@+id/victim_info"
-            android:layout_centerHorizontal="true"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="20dp">
-
-            <TextView
-                android:id="@+id/victim_id"
-                style="@style/KeyLabel"
-                android:text="ID:"/>
-
-            <TextView
-                android:id="@+id/id_field"
-                style="@style/ValueLabel"
-                android:text="@string/underlined_placeholder"/>
-        </LinearLayout>
-
-        <LinearLayout
             android:id="@+id/victim_name_container"
-            android:layout_below="@id/victim_info"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-
             <TextView
                 android:id="@+id/name_label"
                 style="@style/KeyLabel"
-                android:text="Name: "/>
+                android:text="Name:"/>
             <EditText
                 android:id="@+id/victim_name"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 style="@style/ValueLabel"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/victim_info"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/victim_name_container"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:id="@+id/victim_id"
+                style="@style/KeyLabel"
+                android:text="ID:"/>
+            <TextView
+                android:id="@+id/id_field"
+                style="@style/ValueLabel"
+                android:layout_width="200dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:hint="no ID"/>
+            <Button
+                android:id="@+id/button_update_tag"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/screening_button"/>
         </LinearLayout>
 
         <RelativeLayout
             android:id="@+id/victim_sex"
-            android:layout_below="@id/victim_name_container"
+            android:layout_below="@id/victim_info"
             android:layout_width="match_parent"
             android:layout_height="80dp">
 
@@ -134,7 +139,8 @@
                 <Button
                     android:id="@+id/button_safe"
                     style="@style/ScreeningButton"
-                    android:text="Safe"/>
+                    android:text="Safe"
+                    android:textColor="#3FA329"/>
                 <Button
                     android:id="@+id/button_injured"
                     android:layout_toRightOf="@id/button_safe"
