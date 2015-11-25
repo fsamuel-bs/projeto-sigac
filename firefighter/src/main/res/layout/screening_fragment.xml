@@ -36,9 +36,9 @@
             android:orientation="horizontal"
             android:layout_marginTop="20dp">
             <TextView
-                android:id="@+id/victim_id"
+                android:id="@+id/victim_token"
                 style="@style/KeyLabel"
-                android:text="ID:"/>
+                android:text="Token:"/>
             <TextView
                 android:id="@+id/id_field"
                 style="@style/ValueLabel"

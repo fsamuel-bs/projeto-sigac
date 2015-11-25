@@ -184,8 +184,13 @@ public class ScreeningFragment extends Fragment {
     }
 
     private void clear() {
-        mIdField.setText("");
         mVictimName.setText("");
+        mIdField.setText("");
+
+        mSexGroup.deselect();
+        mAgeGroup.deselect();
+        mStateGroup.deselect();
+
         mVictim = new Victim();
     }
 

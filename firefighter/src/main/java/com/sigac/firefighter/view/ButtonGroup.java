@@ -17,4 +17,9 @@ public class ButtonGroup {
         mSelectedButton = button;
         mSelectedButton.setBackgroundResource(R.drawable.selected_screening_button);
     }
+
+    public void deselect() {
+        mSelectedButton.setBackgroundResource(R.drawable.deselected_screening_button);
+        mSelectedButton = null;
+    }
 }

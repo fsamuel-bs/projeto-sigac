@@ -143,9 +143,9 @@ public class Victim {
             JsonObject result = new JsonObject();
             result.add("id", new JsonPrimitive(victim.getId()));
             result.add("name", new JsonPrimitive(victim.getName()));
-            result.add("sex", new JsonPrimitive(victim.getSex().toString()));
-            result.add("age", new JsonPrimitive(victim.getAge().toString()));
-            result.add("state", new JsonPrimitive(victim.getState().toString()));
+            result.add("sex", new JsonPrimitive(victim.getSex().toString().toLowerCase()));
+            result.add("age", new JsonPrimitive(victim.getAge().toString().toLowerCase()));
+            result.add("status", new JsonPrimitive(victim.getState().toString().toLowerCase()));
 
             return result;
 

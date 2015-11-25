@@ -5,7 +5,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -84,6 +83,11 @@ public class SearchFragment extends Fragment {
             } catch (Exception e) {
                 return new ArrayList<>();
             }
+
+            if (victims == null) {
+                return null;
+            }
+
             List<VictimItem> items = new ArrayList<>(victims.size());
             for (Victim victim : victims) {
                 VictimItem item = new VictimItem(victim, victim.getName());
@@ -94,6 +98,10 @@ public class SearchFragment extends Fragment {
 
         @Override
         protected void onPostExecute(final List<VictimItem> victimItems) {
+            if (victimItems == null) {
+                return;
+            }
+
             mAdapter.clear();
             new Handler(mContext.getMainLooper()).post(new Runnable() {
                 @Override

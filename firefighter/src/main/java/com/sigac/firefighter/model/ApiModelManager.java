@@ -20,7 +20,7 @@ import java.util.List;
 public class ApiModelManager extends BaseModelManager {
 
     final static String StationPath = "http://192.168.1.2:1880/";
-    final static String DbPath = "http://powerful-forest-9086.herokuapp.com/?q= ";
+    final static String DbPath = "http://powerful-forest-9086.herokuapp.com/?q=";
 
     private static class InstanceHolder {
         private static final ApiModelManager INSTANCE = new ApiModelManager();
@@ -57,7 +57,6 @@ public class ApiModelManager extends BaseModelManager {
     public void persistVictim(Victim victim) {
         Gson gson = new GsonBuilder().registerTypeAdapter(Victim.class, new Victim.Serializer()).create();
         String victimObject = gson.toJson(victim);
-        Log.e("VICTIM", victimObject);
         postQuery(StationPath, "victim", victimObject);
         notifyObservers();
     }
@@ -113,6 +112,7 @@ public class ApiModelManager extends BaseModelManager {
         try {
             url = new URL(route + query);
         } catch (MalformedURLException e) {
+            Log.e("SIGAC", e.getMessage());
             e.printStackTrace();
         }
 
@@ -127,7 +127,13 @@ public class ApiModelManager extends BaseModelManager {
             OutputStreamWriter wr = new OutputStreamWriter(connection.getOutputStream());
             wr.write(payload);
             wr.flush();
+
+            int httpResult = connection.getResponseCode();
+            if (httpResult != 200) {
+                Log.e("SIGAC", "Request not sent successfully");
+            }
         } catch (IOException e) {
+            Log.e("SIGAC", e.getMessage());
             e.printStackTrace();
         }
     }
