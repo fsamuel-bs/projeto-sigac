@@ -15,12 +15,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.CharBuffer;
 import java.util.List;
 
 public class ApiModelManager extends BaseModelManager {
 
     final static String StationPath = "http://192.168.1.2:1880/";
-    final static String DbPath = "http://powerful-forest-9086.herokuapp.com/?q=";
 
     private static class InstanceHolder {
         private static final ApiModelManager INSTANCE = new ApiModelManager();
@@ -36,29 +36,20 @@ public class ApiModelManager extends BaseModelManager {
 
     @Override
     public void deleteVictim(String id) {
-        String query = "delete%20from%20victims%20where%20id=" + id;
-        getQuery(DbPath, query);
+        postQuery(StationPath, "delete", null);
         notifyObservers();
     }
 
     @Override
     public List<Victim> getVictims() throws Exception  {
-        String query = "select%20*%20from%20victims";
-        String ret = getQuery(DbPath, query);
+        String payload = getQuery(StationPath, "victims");
+        Log.e("VICTIMS", payload);
 
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Victim>>(){}.getType();
-        List<Victim> victims = gson.fromJson(ret, listType);
+        List<Victim> victims = gson.fromJson(payload, listType);
 
         return victims;
-    }
-
-    @Override
-    public void persistVictim(Victim victim) {
-        Gson gson = new GsonBuilder().registerTypeAdapter(Victim.class, new Victim.Serializer()).create();
-        String victimObject = gson.toJson(victim);
-        postQuery(StationPath, "victim", victimObject);
-        notifyObservers();
     }
 
     @Override
@@ -82,6 +73,14 @@ public class ApiModelManager extends BaseModelManager {
         return null;
     }
 
+
+    @Override
+    public void persistVictim(Victim victim) {
+        String victimObject = new Gson().<Victim>toJson(victim);
+        postQuery(StationPath, "victim", victimObject);
+        notifyObservers();
+    }
+
     private String getQuery(String route, String query) {
         BufferedReader in = null;
         try {
@@ -97,10 +96,14 @@ public class ApiModelManager extends BaseModelManager {
         }
 
         try {
-            String inputLine = in.readLine();
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = in.readLine()) != null) {
+                sb.append(line);
+            }
             in.close();
 
-            return inputLine;
+            return sb.toString();
         }  catch (IOException e) {
             Throwables.propagate(e);
             return null;

@@ -33,4 +33,13 @@
         <item name="android:background">@drawable/deselected_screening_button</item>
     </style>
 
+    <style name="SubmitButton" parent="Widget.AppCompat.ActionButton">
+        <item name="android:layout_width">150dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#FF555555</item>
+        <item name="android:background">@drawable/deselected_screening_button</item>
+    </style>
+
+
 </resources>

@@ -1,71 +1,59 @@
 package com.sigac.firefighter;
 
-import com.google.gson.*;
 import com.google.gson.annotations.SerializedName;
 
-import java.lang.reflect.Type;
 
 // TODO: Implement parcelable
 public class Victim {
     public enum Sex {
-        @SerializedName("0")
-        MALE(0),
+        @SerializedName("male")
+        MALE,
 
-        @SerializedName("1")
-        FEMALE(1);
-
-        private final int value;
-
-        Sex (int value) {
-            this.value = value;
-        }
+        @SerializedName("female")
+        FEMALE
     }
 
     public enum Age {
-        @SerializedName("0")
-        CHILD(0),
+        @SerializedName("child")
+        CHILD,
 
-        @SerializedName("1")
-        YOUNG(1),
+        @SerializedName("young")
+        YOUNG,
 
-        @SerializedName("2")
-        ADULT(2),
+        @SerializedName("adult")
+        ADULT,
 
-        @SerializedName("3")
-        OLD(3);
-
-        private final int value;
-
-        Age (int value) {
-            this.value = value;
-        }
+        @SerializedName("old")
+        OLD
     }
 
     public enum Status {
-        @SerializedName("0")
-        GREEN(0),
+        @SerializedName("green")
+        GREEN,
 
-        @SerializedName("1")
-        YELLOW(1),
+        @SerializedName("yellow")
+        YELLOW,
 
-        @SerializedName("2")
-        RED(2),
+        @SerializedName("red")
+        RED,
 
-        @SerializedName("3")
-        BLACK(3);
-
-        private final int value;
-
-        Status(int value) {
-            this.value = value;
-        }
+        @SerializedName("black")
+        BLACK
     }
 
+    @SerializedName("token")
     private String token;
+
+    @SerializedName("name")
     private String name;
 
+    @SerializedName("sex")
     private Sex sex;
+
+    @SerializedName("age")
     private Age age;
+
+    @SerializedName("status")
     private Status status;
 
     public Victim() {
@@ -135,21 +123,5 @@ public class Victim {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public static class Serializer implements JsonSerializer<Victim> {
-        @Override
-        public JsonElement serialize(Victim victim, Type typeOfSrc, JsonSerializationContext context) {
-            JsonObject result = new JsonObject();
-
-            result.add("token", new JsonPrimitive(victim.getToken()));
-            result.add("name", new JsonPrimitive(victim.getName()));
-            result.add("sex", new JsonPrimitive(victim.getSex().toString().toLowerCase()));
-            result.add("age", new JsonPrimitive(victim.getAge().toString().toLowerCase()));
-            result.add("status", new JsonPrimitive(victim.getStatus().toString().toLowerCase()));
-
-            return result;
-
-        }
     }
 }

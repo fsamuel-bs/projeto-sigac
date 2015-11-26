@@ -12,14 +12,14 @@
 
         <LinearLayout
             android:id="@+id/victim_name_container"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
                 android:id="@+id/name_label"
                 style="@style/KeyLabel"
-                android:text="Name:"/>
+                android:text="   Name:"/>
             <EditText
                 android:id="@+id/victim_name"
                 android:layout_width="200dp"
@@ -38,7 +38,7 @@
             <TextView
                 android:id="@+id/victim_token"
                 style="@style/KeyLabel"
-                android:text="Token:"/>
+                android:text="  Token:"/>
             <TextView
                 android:id="@+id/id_field"
                 style="@style/ValueLabel"
@@ -56,15 +56,16 @@
         <RelativeLayout
             android:id="@+id/victim_sex"
             android:layout_below="@id/victim_info"
+            android:layout_marginTop="10dp"
             android:layout_width="match_parent"
-            android:layout_height="80dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/sex_label"
                 android:layout_alignParentLeft="true"
                 android:layout_centerInParent="true"
                 style="@style/KeyLabel"
-                android:text="Sex:"/>
+                android:text="   Sex:"/>
             <Button
                 android:id="@+id/button_male"
                 android:layout_toRightOf="@id/sex_label"
@@ -83,39 +84,43 @@
         <RelativeLayout
             android:id="@+id/victim_age"
             android:layout_below="@id/victim_sex"
+            android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="80dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/age_label"
                 android:layout_alignParentLeft="true"
-                android:layout_centerInParent="true"
+                android:layout_centerVertical="true"
                 style="@style/KeyLabel"
-                android:text="Age:"/>
-            <Button
-                android:id="@+id/button_child"
-                android:layout_toRightOf="@id/age_label"
-                android:layout_centerInParent="true"
-                style="@style/ScreeningButton"
-                android:text="Child"/>
-            <Button
-                android:id="@+id/button_young"
-                android:layout_toRightOf="@id/button_child"
-                android:layout_centerInParent="true"
-                style="@style/ScreeningButton"
-                android:text="Young"/>
-            <Button
-                android:id="@+id/button_adult"
-                android:layout_toRightOf="@id/button_young"
-                android:layout_centerInParent="true"
-                style="@style/ScreeningButton"
-                android:text="Adult"/>
-            <Button
-                android:id="@+id/button_old"
-                android:layout_toRightOf="@id/button_adult"
-                android:layout_centerInParent="true"
-                style="@style/ScreeningButton"
-                android:text="Old"/>
+                android:text="   Age:"/>
+
+            <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/age_label"
+                    android:layout_centerVertical="true">
+                <Button
+                        android:id="@+id/button_child"
+                        style="@style/ScreeningButton"
+                        android:text="Child"/>
+                <Button
+                        android:id="@+id/button_young"
+                        android:layout_toRightOf="@id/button_child"
+                        style="@style/ScreeningButton"
+                        android:text="Young"/>
+                <Button
+                        android:id="@+id/button_adult"
+                        android:layout_below="@id/button_child"
+                        style="@style/ScreeningButton"
+                        android:text="Adult"/>
+                <Button
+                        android:id="@+id/button_old"
+                        android:layout_below="@id/button_young"
+                        android:layout_toRightOf="@id/button_adult"
+                        style="@style/ScreeningButton"
+                        android:text="Old"/>
+            </RelativeLayout>
 
         </RelativeLayout>
 
@@ -124,7 +129,8 @@
             android:layout_below="@id/victim_age"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true">
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:id="@+id/state_label"
@@ -165,9 +171,10 @@
 
         <Button
             android:id="@+id/submit_button"
+            android:layout_margin="10dp"
             android:layout_below="@id/victim_status"
-            android:layout_alignRight="@id/victim_status"
-            style="@style/ScreeningButton"
+            android:layout_centerHorizontal="true"
+            style="@style/SubmitButton"
             android:text="Submit"/>
 
     </RelativeLayout>
