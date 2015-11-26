@@ -12,14 +12,16 @@ public class ButtonGroup {
 
     public void selectButton(Button button) {
         if (mSelectedButton != null) {
-            mSelectedButton.setBackgroundResource(R.drawable.deselected_screening_button);
+            mSelectedButton.setBackgroundResource(R.drawable.screening_button_deselected);
         }
         mSelectedButton = button;
-        mSelectedButton.setBackgroundResource(R.drawable.selected_screening_button);
+        mSelectedButton.setBackgroundResource(R.drawable.screening_button_selected);
     }
 
     public void deselect() {
-        mSelectedButton.setBackgroundResource(R.drawable.deselected_screening_button);
+        if (mSelectedButton != null) {
+            mSelectedButton.setBackgroundResource(R.drawable.screening_button_deselected);
+        }
         mSelectedButton = null;
     }
 }

@@ -50,7 +50,7 @@
                 android:id="@+id/button_update_tag"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/deselected_screening_button"/>
+                android:background="@drawable/download_button_selector"/>
         </LinearLayout>
 
         <RelativeLayout
@@ -175,6 +175,7 @@
             android:layout_below="@id/victim_status"
             android:layout_centerHorizontal="true"
             style="@style/SubmitButton"
+            android:background="@drawable/submit_button_selector"
             android:text="Submit"/>
 
     </RelativeLayout>

@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mAdapter = new MainFragmentPageAdapter(getSupportFragmentManager(), this);
         mViewPager.setAdapter(mAdapter);
