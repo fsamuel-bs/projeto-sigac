@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="button_selected" type="color">#DDD</item>
+    <item name="button_deselected" type="color">#FFF</item>
+    <item name="app_background" type="color">#E1E1E1</item>
+    <item name="key_label" type="color">#838383</item>
+    <item name="value_label" type="color">#343434</item>
+</resources>

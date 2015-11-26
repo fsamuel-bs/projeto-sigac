@@ -36,7 +36,7 @@ public class VictimFragment extends Fragment {
         vVictimIdQuery = (EditText) view.findViewById(R.id.victim_id_query);
         vVictimComment = (EditText) view.findViewById(R.id.victim_comment);
 
-        vVictimSex = (Spinner) view.findViewById(R.id.victim_sex);
+        vVictimSex = (Spinner) view.findViewById(R.id.sex_card);
         mVictimSexAdapter = ArrayAdapter.createFromResource(
                 getActivity(),
                 R.array.victim_sex,
