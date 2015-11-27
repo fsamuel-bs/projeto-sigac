@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardStyle"
+    tools:showIn="@layout/screening_fragment">
+
+    <RelativeLayout
+        android:id="@+id/age_info"
+        style="@style/CardInfo">
+
+        <ImageView
+            android:id="@+id/age_icon"
+            style="@style/CardIcon"
+            android:background="@drawable/age"/>
+
+        <TextView
+            android:id="@+id/age_label"
+            style="@style/KeyLabel"
+            android:text="Age"
+            android:layout_toRightOf="@id/age_icon"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/age_info"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_child"
+                style="@style/ScreeningButton"
+                android:text="Child"/>
+
+            <Button
+                android:id="@+id/button_young"
+                style="@style/ScreeningButton"
+                android:text="Young"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button_adult"
+                android:layout_below="@id/button_child"
+                style="@style/ScreeningButton"
+                android:text="Adult"/>
+
+            <Button
+                android:id="@+id/button_old"
+                android:layout_below="@id/button_young"
+                android:layout_toRightOf="@id/button_adult"
+                style="@style/ScreeningButton"
+                android:text="Old"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

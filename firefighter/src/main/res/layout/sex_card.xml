@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardStyle"
+    tools:showIn="@layout/screening_fragment">
+
+    <RelativeLayout
+        android:id="@+id/sex_info"
+        style="@style/CardInfo">
+
+        <ImageView
+            android:id="@+id/sex_icon"
+            style="@style/CardIcon"
+            android:background="@drawable/sex"/>
+
+        <TextView
+            android:id="@+id/sex_label"
+            style="@style/KeyLabel"
+            android:text="Sex"
+            android:layout_toRightOf="@id/sex_icon"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/sex_info">
+
+        <Button
+            android:id="@+id/button_male"
+            style="@style/ScreeningButton"
+            android:text="Male"/>
+
+        <Button
+            android:id="@+id/button_female"
+            style="@style/ScreeningButton"
+            android:text="Female"/>
+    </LinearLayout>
+</RelativeLayout>
+
+                

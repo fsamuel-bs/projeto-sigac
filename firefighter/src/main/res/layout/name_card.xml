@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/OneLineCardStyle"
+    tools:showIn="@layout/screening_fragment">
+
+    <RelativeLayout
+        android:id="@+id/name_info"
+        style="@style/OneLineCardInfo">
+
+        <ImageView
+            android:id="@+id/name_icon"
+            android:background="@drawable/name"
+            style="@style/CardIcon"/>
+
+        <TextView
+            android:id="@+id/name_label"
+            android:layout_toRightOf="@id/name_icon"
+            android:text="Name"
+            style="@style/KeyLabel"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/victim_name"
+        android:layout_toRightOf="@id/name_info"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        style="@style/ValueLabel"/>
+
+</RelativeLayout>

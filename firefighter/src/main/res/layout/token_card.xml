@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/OneLineCardStyle"
+    tools:showIn="@layout/screening_fragment">
+
+    <RelativeLayout
+        android:id="@+id/token_info"
+        style="@style/OneLineCardInfo">
+
+        <ImageView
+            android:id="@+id/token_icon"
+            android:background="@drawable/token"
+            style="@style/CardIcon"/>
+
+        <TextView
+            android:id="@+id/victim_token"
+            android:layout_toRightOf="@id/token_icon"
+            android:text="Token"
+            style="@style/KeyLabel"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/id_field"
+        android:enabled="false"
+        android:layout_width="250dp"
+        android:layout_toRightOf="@id/token_info"
+        android:hint="No Token"
+        style="@style/ValueLabel"/>
+
+    <Button
+        android:id="@+id/button_update_tag"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/ic_action_download_holo_light"/>
+</RelativeLayout>

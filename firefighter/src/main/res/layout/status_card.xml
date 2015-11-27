@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/CardStyle"
+    tools:showIn="@layout/screening_fragment">
+
+    <RelativeLayout
+        android:id="@+id/status_info"
+        style="@style/CardInfo">
+
+        <ImageView
+            android:id="@+id/status_icon"
+            style="@style/CardIcon"
+            android:background="@drawable/status"/>
+
+        <TextView
+            android:id="@+id/status_label"
+            style="@style/KeyLabel"
+            android:layout_toRightOf="@id/status_icon"
+            android:text="Status"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/status_info"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_safe"
+                    style="@style/ScreeningButton"
+                    android:text="Safe"
+                    android:textColor="#3FA329"/>
+
+                <Button
+                    android:id="@+id/button_injured"
+                    android:layout_toRightOf="@id/button_safe"
+                    style="@style/ScreeningButton"
+                    android:text="Injured"
+                    android:textColor="#C6CA00"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/button_severe"
+                    android:layout_below="@id/button_safe"
+                    style="@style/ScreeningButton"
+                    android:text="Severe"
+                    android:textColor="#E74C3C"/>
+
+                <Button
+                    android:id="@+id/button_dead"
+                    android:layout_below="@id/button_injured"
+                    android:layout_toRightOf="@id/button_severe"
+                    style="@style/ScreeningButton"
+                    android:text="Dead"
+                    android:textColor="#000"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
+
+                
