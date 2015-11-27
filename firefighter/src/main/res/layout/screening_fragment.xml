@@ -4,222 +4,267 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/app_background">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <RelativeLayout
                 android:layout_width="400dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_centerHorizontal="true">
+
                 <RelativeLayout
                     android:id="@+id/token_card"
                     style="@style/CardStyle"
                     android:orientation="horizontal">
+
                     <RelativeLayout
                         android:id="@+id/token_info"
                         style="@style/CardInfo">
+
                         <ImageView
                             android:id="@+id/token_icon"
                             style="@style/CardIcon"
-                            android:background="@drawable/token"/>
+                            android:background="@drawable/token" />
+
                         <TextView
                             android:id="@+id/victim_token"
                             android:layout_toRightOf="@id/token_icon"
                             style="@style/KeyLabel"
-                            android:text="Token"/>
+                            android:text="Token" />
                     </RelativeLayout>
+
                     <TextView
                         android:id="@+id/id_field"
                         style="@style/ValueLabel"
                         android:layout_width="250dp"
                         android:layout_below="@id/token_info"
-                        android:hint="no token"/>
+                        android:hint="no token" />
+
                     <Button
                         android:id="@+id/button_update_tag"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
-                        android:background="@drawable/download_button_selector"/>
+                        android:background="@drawable/download_button_selector" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/name_card"
                     android:layout_below="@id/token_card"
                     style="@style/CardStyle"
                     android:orientation="horizontal">
+
                     <RelativeLayout
                         android:id="@+id/name_info"
                         style="@style/CardInfo">
+
                         <ImageView
                             android:id="@+id/name_icon"
                             style="@style/CardIcon"
-                            android:background="@drawable/name"/>
+                            android:background="@drawable/name" />
+
                         <TextView
                             android:id="@+id/name_label"
                             style="@style/KeyLabel"
                             android:text="Name"
-                            android:layout_toRightOf="@id/name_icon"/>
+                            android:layout_toRightOf="@id/name_icon" />
                     </RelativeLayout>
+
                     <EditText
                         android:id="@+id/victim_name"
                         android:layout_below="@id/name_info"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        style="@style/ValueLabel"/>
+                        style="@style/ValueLabel" />
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/sex_card"
                     android:layout_below="@id/name_card"
                     style="@style/CardStyle">
+
                     <RelativeLayout
                         android:id="@+id/sex_info"
                         style="@style/CardInfo">
+
                         <ImageView
                             android:id="@+id/sex_icon"
                             style="@style/CardIcon"
-                            android:background="@drawable/sex"/>
+                            android:background="@drawable/sex" />
+
                         <TextView
                             android:id="@+id/sex_label"
                             style="@style/KeyLabel"
                             android:text="Sex"
-                            android:layout_toRightOf="@id/sex_icon"/>
+                            android:layout_toRightOf="@id/sex_icon" />
                     </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/sex_info">
+
                         <Button
                             android:id="@+id/button_male"
                             style="@style/ScreeningButton"
-                            android:text="Male"/>
+                            android:text="Male" />
+
                         <Button
                             android:id="@+id/button_female"
                             style="@style/ScreeningButton"
-                            android:text="Female"/>
+                            android:text="Female" />
                     </LinearLayout>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/victim_age"
                     android:layout_below="@id/sex_card"
                     android:layout_marginTop="10dp"
                     style="@style/CardStyle">
+
                     <RelativeLayout
                         android:id="@+id/age_info"
                         style="@style/CardInfo">
+
                         <ImageView
                             android:id="@+id/age_icon"
                             style="@style/CardIcon"
-                            android:background="@drawable/age"/>
+                            android:background="@drawable/age" />
+
                         <TextView
                             android:id="@+id/age_label"
                             style="@style/KeyLabel"
                             android:text="Age"
-                            android:layout_toRightOf="@id/age_icon"/>
+                            android:layout_toRightOf="@id/age_icon" />
                     </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/age_info"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
+
                             <Button
                                 android:id="@+id/button_child"
                                 style="@style/ScreeningButton"
-                                android:text="Child"/>
+                                android:text="Child" />
+
                             <Button
                                 android:id="@+id/button_young"
                                 style="@style/ScreeningButton"
-                                android:text="Young"/>
+                                android:text="Young" />
                         </LinearLayout>
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="horizontal">
+
                             <Button
                                 android:id="@+id/button_adult"
                                 android:layout_below="@id/button_child"
                                 style="@style/ScreeningButton"
-                                android:text="Adult"/>
+                                android:text="Adult" />
+
                             <Button
                                 android:id="@+id/button_old"
                                 android:layout_below="@id/button_young"
                                 android:layout_toRightOf="@id/button_adult"
                                 style="@style/ScreeningButton"
-                                android:text="Old"/>
+                                android:text="Old" />
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
+
                 <RelativeLayout
                     android:id="@+id/status_card"
                     android:layout_below="@id/victim_age"
                     style="@style/CardStyle">
+
                     <RelativeLayout
                         android:id="@+id/status_info"
                         style="@style/CardInfo">
+
                         <ImageView
                             android:id="@+id/status_icon"
                             style="@style/CardIcon"
-                            android:background="@drawable/status"/>
+                            android:background="@drawable/status" />
+
                         <TextView
                             android:id="@+id/status_label"
                             style="@style/KeyLabel"
                             android:layout_toRightOf="@id/status_icon"
-                            android:text="Status"/>
+                            android:text="Status" />
                     </RelativeLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_below="@id/status_info"
                         android:orientation="vertical">
+
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
+
                                 <Button
                                     android:id="@+id/button_safe"
                                     style="@style/ScreeningButton"
                                     android:text="Safe"
-                                    android:textColor="#3FA329"/>
+                                    android:textColor="#3FA329" />
+
                                 <Button
                                     android:id="@+id/button_injured"
                                     android:layout_toRightOf="@id/button_safe"
                                     style="@style/ScreeningButton"
                                     android:text="Injured"
-                                    android:textColor="#C6CA00"/>
+                                    android:textColor="#C6CA00" />
                             </LinearLayout>
+
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
                                 android:orientation="horizontal">
+
                                 <Button
                                     android:id="@+id/button_severe"
                                     android:layout_below="@id/button_safe"
                                     style="@style/ScreeningButton"
                                     android:text="Severe"
-                                    android:textColor="#E74C3C"/>
+                                    android:textColor="#E74C3C" />
+
                                 <Button
                                     android:id="@+id/button_dead"
                                     android:layout_below="@id/button_injured"
                                     android:layout_toRightOf="@id/button_severe"
                                     style="@style/ScreeningButton"
                                     android:text="Dead"
-                                    android:textColor="#000"/>
+                                    android:textColor="#000" />
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
                 </RelativeLayout>
+
                 <Button
                     android:id="@+id/submit_button"
                     android:layout_marginTop="10dp"
@@ -227,7 +272,7 @@
                     android:layout_alignParentRight="true"
                     style="@style/SubmitButton"
                     android:background="@drawable/submit_button_selector"
-                    android:text="Submit"/>
+                    android:text="Submit" />
             </RelativeLayout>
         </RelativeLayout>
     </ScrollView>
