@@ -17,16 +17,23 @@
         <item name="android:background">@drawable/card_background</item>
     </style>
 
+    <style name="OneLineCardStyle" parent="CardStyle">
+        <item name="android:layout_height">60dp</item>
+    </style>
+
     <style name="CardInfo" parent="Theme.AppCompat.Light">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginBottom">5dp</item>
     </style>
 
+    <style name="OneLineCardInfo" parent="CardInfo">
+        <item name="android:layout_centerVertical">true</item>
+        <item name="android:layout_marginRight">10dp</item>
+    </style>
+
     <style name="CardIcon" parent="@android:style/TextAppearance.Medium">
-        <item name="android:layout_alignParentTop">true</item>
         <item name="android:layout_alignParentLeft">true</item>
-        <item name="android:layout_marginBottom">10dp</item>
         <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_height">25dp</item>
         <item name="android:layout_width">25dp</item>
@@ -43,7 +50,8 @@
 
     <style name="ValueLabel" parent="@android:style/TextAppearance.Medium">
         <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">24dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/value_label</item>
     </style>

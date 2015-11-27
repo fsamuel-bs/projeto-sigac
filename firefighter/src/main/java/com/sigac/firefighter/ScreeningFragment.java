@@ -62,6 +62,7 @@ public class ScreeningFragment extends Fragment {
         mStateGroup = new ButtonGroup();
 
         setActions();
+        clear();
         new GetTagTask().execute();
 
         return view;
@@ -78,7 +79,6 @@ public class ScreeningFragment extends Fragment {
 
         mChildButton = (Button) view.findViewById(R.id.button_child);
         mYoungButton = (Button) view.findViewById(R.id.button_young);
-
         mAdultButton = (Button) view.findViewById(R.id.button_adult);
         mOldButton = (Button) view.findViewById(R.id.button_old);
 
@@ -187,8 +187,13 @@ public class ScreeningFragment extends Fragment {
         mIdField.setText("");
 
         mSexGroup.deselect();
+        mMaleButton.callOnClick();
+
         mAgeGroup.deselect();
+        mAdultButton.callOnClick();
+
         mStateGroup.deselect();
+        mSafeButton.callOnClick();
 
         mVictim = new Victim();
     }
