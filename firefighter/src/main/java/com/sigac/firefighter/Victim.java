@@ -72,6 +72,14 @@ public class Victim {
         this.status = status;
     }
 
+    public Victim(Victim victim) {
+        this.token = victim.token;
+        this.name = victim.name;
+        this.sex = victim.sex;
+        this.age = victim.age;
+        this.status = victim.status;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

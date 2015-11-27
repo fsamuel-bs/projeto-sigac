@@ -2,10 +2,7 @@ package com.sigac.firefighter.model;
 
 import com.sigac.firefighter.Victim;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class MemoryMockModelManager extends BaseModelManager {
 
@@ -16,6 +13,8 @@ public class MemoryMockModelManager extends BaseModelManager {
     public static MemoryMockModelManager getInstance() {
         return InstanceHolder.INSTANCE;
     }
+
+    private static final Random RANDOM = new Random();
 
     private Map<String, Victim> mDatabase = new HashMap<>();
 
@@ -42,6 +41,10 @@ public class MemoryMockModelManager extends BaseModelManager {
 
     @Override
     public String getTag() {
-        return "123";
+        String id;
+        do {
+            id = Integer.toString(Math.abs(RANDOM.nextInt() % 10000), 16);
+        } while (mDatabase.containsKey(id));
+        return id;
     }
 }

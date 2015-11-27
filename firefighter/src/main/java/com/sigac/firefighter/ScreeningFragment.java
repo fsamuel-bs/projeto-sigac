@@ -176,7 +176,8 @@ public class ScreeningFragment extends Fragment {
             public void onClick(View v) {
                 mVictim.setToken(mIdField.getText().toString());
                 mVictim.setName(mVictimName.getText().toString());
-                new PersistVictimsTask().execute();
+                new PersistVictimsTask().execute(new Victim(mVictim));
+                new GetTagTask().execute();
                 clear();
             }
         });
@@ -198,10 +199,10 @@ public class ScreeningFragment extends Fragment {
         mVictim = new Victim();
     }
 
-    private class PersistVictimsTask extends AsyncTask<Void, Void, Void> {
+    private class PersistVictimsTask extends AsyncTask<Victim, Void, Void> {
         @Override
-        protected Void doInBackground(Void... params) {
-            mModelManager.persistVictim(mVictim);
+        protected Void doInBackground(Victim... params) {
+            mModelManager.persistVictim(params[0]);
             return null;
         }
     }
