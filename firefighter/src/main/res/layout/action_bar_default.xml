@@ -9,31 +9,27 @@
     >
 
     <ImageView
-        android:id="@+id/search_action_bar_back_icon"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_action_arrow_left_holo_dark"
+        android:src="@mipmap/fire"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="@drawable/action_bar_button"
         />
 
-    <EditText
-        android:id="@+id/action_bar_search_query"
+    <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:textColor="#FFFFFFFF"
-        android:textColorHint="#CCFFFFFF"
-        android:textSize="14sp"
-        android:hint="Search Query"
+        android:text="Firefighter"
         />
 
     <ImageView
-        android:id="@+id/search_action_bar_search_icon"
+        android:id="@+id/default_action_bar_search_icon"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:src="@drawable/ic_action_search_red_light"
+        android:src="@drawable/ic_action_search_holo_dark"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="@drawable/action_bar_button"
