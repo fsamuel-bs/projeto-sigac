@@ -13,12 +13,12 @@
         <include
             android:id="@+id/action_bar_default"
             layout="@layout/action_bar_default"
-            android:visibility="gone" />
+            />
 
         <include
             android:id="@+id/action_bar_search"
             layout="@layout/action_bar_search"
-            android:visibility="gone" />
+            />
 
     </FrameLayout>
 

@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private View mBackIcon;
     private Class<? extends Fragment> mFragmentBeforeSearch;
     private EditText mSearchQuery;
+    private View mActionBarDefault;
+    private View mActionBarSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
 
         mActionBarContainer = (ViewGroup) findViewById(R.id.action_bar_container);
         setActionBar(R.id.action_bar_default);
+        mActionBarSearch = findViewById(R.id.action_bar_search);
+        mActionBarDefault = findViewById(R.id.action_bar_default);
 
         mSearchIcon = findViewById(R.id.default_action_bar_search_icon);
         mSearchIcon.setOnClickListener(mOnSearchIconClickListener);
@@ -47,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         mAdapter = new MainFragmentPageAdapter(getSupportFragmentManager(), this);
         mViewPager.setAdapter(mAdapter);
+        mViewPager.addOnPageChangeListener(mOnPageChangeListener);
 
         mTabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
@@ -70,6 +75,18 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+            /* TODO: Remove position dependency plz */
+            if (position == MainFragmentPageAdapter.SCREENING_TAB_INDEX && position + 1 == MainFragmentPageAdapter.SEARCH_TAB_INDEX) {
+                mActionBarDefault.setAlpha(1 - positionOffset);
+                mActionBarSearch.setAlpha(positionOffset);
+            }
+        }
+    };
+
     private View.OnClickListener mOnSearchIconClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
@@ -90,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     private void setActionBar(int id) {
         for (int i = 0; i < mActionBarContainer.getChildCount(); i++) {
             View actionBar = mActionBarContainer.getChildAt(i);
-            actionBar.setVisibility((actionBar.getId() == id) ? View.VISIBLE : View.GONE);
+            actionBar.setAlpha((actionBar.getId() == id) ? 1f : 0f);
         }
     }
 

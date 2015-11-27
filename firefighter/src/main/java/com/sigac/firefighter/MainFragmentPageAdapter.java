@@ -8,6 +8,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class MainFragmentPageAdapter extends FragmentPagerAdapter {
 
     /* TODO: So ugly, but at least we don't have magical numbers flying around */
+    public static int SCREENING_TAB_INDEX = 0;
+    public static int SEARCH_TAB_INDEX = 1;
     public static int VICTIM_TAB_INDEX = 2;
 
     /* TODO: Who needs types? :P */
