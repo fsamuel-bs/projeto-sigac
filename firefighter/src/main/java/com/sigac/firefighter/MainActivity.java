@@ -5,9 +5,15 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import com.google.common.base.Preconditions;
 
+
+/* TODO: Handle back button/state */
 public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
@@ -18,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     private View mSearchIcon;
     private View mBackIcon;
     private Class<? extends Fragment> mFragmentBeforeSearch;
+    private EditText mSearchQuery;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,10 @@ public class MainActivity extends AppCompatActivity {
         mSearchIcon = findViewById(R.id.default_action_bar_search_icon);
         mSearchIcon.setOnClickListener(mOnSearchIconClickListener);
 
+        mSearchQuery = (EditText) findViewById(R.id.action_bar_search_query);
+        mSearchQuery.addTextChangedListener(mOnSearchQueryChangeListener);
+
+
         mBackIcon = findViewById(R.id.search_action_bar_back_icon);
         mBackIcon.setOnClickListener(mOnBackIconClickListener);
 
@@ -40,6 +51,24 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         mTabLayout.setupWithViewPager(mViewPager);
     }
+
+    private TextWatcher mOnSearchQueryChangeListener = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            Fragment fragment = mAdapter.getItem(mViewPager.getCurrentItem());
+            Preconditions.checkState(fragment instanceof SearchFragment, "Modifying search query without search fragment active");
+            SearchFragment searchFragment = (SearchFragment) fragment;
+            searchFragment.search(s.toString());
+        }
+    };
 
     private View.OnClickListener mOnSearchIconClickListener = new View.OnClickListener() {
         @Override
