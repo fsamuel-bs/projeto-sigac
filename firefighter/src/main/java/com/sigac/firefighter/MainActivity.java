@@ -2,11 +2,11 @@ package com.sigac.firefighter;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private ViewGroup mActionBarContainer;
     private View mSearchIcon;
     private View mBackIcon;
+    private Class<? extends Fragment> mFragmentBeforeSearch;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,8 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             setActionBar(R.id.action_bar_search);
-            Toast.makeText(MainActivity.this, "Change fragment to search results", Toast.LENGTH_LONG).show();
+            mFragmentBeforeSearch = mAdapter.getItem(mViewPager.getCurrentItem()).getClass();
+            goToFragment(SearchFragment.class);
         }
     };
 
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onClick(View v) {
             setActionBar(R.id.action_bar_default);
-            Toast.makeText(MainActivity.this, "Change fragment to previous one", Toast.LENGTH_LONG).show();
+            goToFragment(mFragmentBeforeSearch);
         }
     };
 
@@ -64,9 +66,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToVictim(Victim victim) {
-        int i = mAdapter.getFragmentIndex(VictimFragment.class);
-        mViewPager.setCurrentItem(i);
-        VictimFragment fragment = (VictimFragment) mAdapter.getItem(MainFragmentPageAdapter.VICTIM_TAB_INDEX);
+        VictimFragment fragment = goToFragment(VictimFragment.class);
         fragment.selectVictim(victim);
+    }
+
+    public <T extends Fragment> T goToFragment(Class<T> fragmentClass) {
+        int i = mAdapter.getFragmentIndex(fragmentClass);
+        mViewPager.setCurrentItem(i);
+        T fragment = fragmentClass.cast(mAdapter.getItem(i));
+        return fragment;
     }
 }
