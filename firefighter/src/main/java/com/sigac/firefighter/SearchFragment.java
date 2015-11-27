@@ -65,6 +65,9 @@ public class SearchFragment extends Fragment {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             VictimItem item = mAdapter.getItem(position);
+            if (item == null || item.victim == null) {
+                return;
+            }
             MainActivity main = (MainActivity) getActivity();
             main.goToVictim(item.victim);
         }
