@@ -1,149 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    >
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
-
-    <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="4"
-        android:orientation="vertical"
-        >
-
-        <LinearLayout
+    android:background="@color/app_background">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="400dp"
                 android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="ID:"
-                />
+                android:layout_centerHorizontal="true">
 
-            <EditText
-                android:id="@+id/victim_id_query"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Victim ID"
-                android:enabled="false"
-                android:textColor="#FF444444"
-                android:inputType="text" />
-
-            <Button
-                android:id="@+id/victim_button"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="Go"
-                android:enabled="false"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            >
-
-            <LinearLayout
-                android:layout_width="100dp"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="right"
-                >
-
-                <TextView
-                    android:text="Name:"
-                    style="@style/VictimFormLabel"
-                    />
-
-                <TextView
-                    android:text="Sex:"
-                    style="@style/VictimFormLabel"
-                    />
-
-                <TextView
-                    android:text="Priority:"
-                    style="@style/VictimFormLabel"
-                    />
-
-                <TextView
-                    android:text="Comment:"
-                    style="@style/VictimFormLabel"
-                    />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:gravity="left"
-                >
-
-                <EditText
-                    android:id="@+id/victim_name"
+                <include
+                    android:id="@+id/token_card"
+                    layout="@layout/editable_token_card"
+                    style="@style/CardStyle"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:enabled="false"
-                    android:textColor="#FF444444"
-                    android:text="Name"
-                    />
+                    android:layout_height="wrap_content"/>
 
-                <Spinner
+                <include
+                    android:id="@+id/name_card"
+                    layout="@layout/name_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    style="@style/CardStyle"
+                    android:layout_below="@id/token_card" />
+
+                <include
                     android:id="@+id/sex_card"
+                    layout="@layout/sex_card"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    />
+                    android:layout_height="wrap_content"
+                    style="@style/CardStyle"
+                    android:layout_below="@id/name_card" />
 
-                <Spinner
-                    android:id="@+id/victim_priority"
+                <include
+                    android:id="@+id/victim_age"
+                    layout="@layout/age_card"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    />
+                    android:layout_height="wrap_content"
+                    style="@style/CardStyle"
+                    android:layout_below="@id/sex_card" />
 
-                <EditText
-                    android:id="@+id/victim_comment"
-                    android:inputType="textMultiLine"
-                    android:lines="8"
-                    android:minLines="6"
-                    android:gravity="top|start"
-                    android:maxLines="10"
+                <include
+                    android:id="@+id/status_card"
+                    layout="@layout/status_card"
                     android:layout_width="match_parent"
-                    android:layout_height="125dp"
-                    android:text="Extremely injured?"
-                    />
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        />
-
-
-
+                    android:layout_height="wrap_content"
+                    style="@style/CardStyle"
+                    android:layout_below="@id/victim_age" />
+                <Button
+                    android:id="@+id/submit_button"
+                    android:layout_marginTop="10dp"
+                    android:layout_below="@id/status_card"
+                    android:layout_alignParentRight="true"
+                    style="@style/SubmitButton"
+                    android:background="@drawable/submit_button_selector"
+                    android:text="Submit" />
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 </LinearLayout>
