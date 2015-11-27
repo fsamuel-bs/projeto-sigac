@@ -39,4 +39,13 @@ public class MainFragmentPageAdapter extends FragmentPagerAdapter {
         return (String) TABS[position][0];
     }
 
+    public int getFragmentIndex(Class<? extends Fragment> fragmentClass) {
+        for (int i = 0; i < TABS.length; i++) {
+            if (fragmentClass.isInstance(TABS[i][1])) {
+                return i;
+            }
+        }
+        throw new IllegalArgumentException("No fragment of provided class.");
+    }
+
 }

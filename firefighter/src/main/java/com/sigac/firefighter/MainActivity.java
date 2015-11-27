@@ -64,7 +64,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void goToVictim(Victim victim) {
-        mViewPager.setCurrentItem(MainFragmentPageAdapter.VICTIM_TAB_INDEX);
+        int i = mAdapter.getFragmentIndex(VictimFragment.class);
+        mViewPager.setCurrentItem(i);
         VictimFragment fragment = (VictimFragment) mAdapter.getItem(MainFragmentPageAdapter.VICTIM_TAB_INDEX);
         fragment.selectVictim(victim);
     }
