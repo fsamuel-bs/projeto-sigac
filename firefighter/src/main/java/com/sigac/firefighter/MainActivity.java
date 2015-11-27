@@ -16,6 +16,8 @@ import com.google.common.base.Preconditions;
 /* TODO: Handle back button/state */
 public class MainActivity extends AppCompatActivity {
 
+    private static final float EPS = 0.001f;
+
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
     private View mSearchButton;
@@ -81,11 +83,16 @@ public class MainActivity extends AppCompatActivity {
             super.onPageScrolled(position, positionOffset, positionOffsetPixels);
             /* TODO: Remove position dependency plz */
             if (position == MainFragmentPageAdapter.SCREENING_TAB_INDEX && position + 1 == MainFragmentPageAdapter.SEARCH_TAB_INDEX) {
-                mActionBarDefault.setAlpha(1 - positionOffset);
-                mActionBarSearch.setAlpha(positionOffset);
+                setAlpha(mActionBarDefault, 1 - positionOffset);
+                setAlpha(mActionBarSearch, positionOffset);
             }
         }
     };
+
+    private void setAlpha(View view, float alpha) {
+        view.setAlpha(alpha);
+        view.setVisibility((alpha < EPS) ? View.GONE : View.VISIBLE);
+    }
 
     private View.OnClickListener mOnSearchIconClickListener = new View.OnClickListener() {
         @Override
@@ -107,7 +114,8 @@ public class MainActivity extends AppCompatActivity {
     private void setActionBar(int id) {
         for (int i = 0; i < mActionBarContainer.getChildCount(); i++) {
             View actionBar = mActionBarContainer.getChildAt(i);
-            actionBar.setAlpha((actionBar.getId() == id) ? 1f : 0f);
+            actionBar.setVisibility((actionBar.getId() == id) ? View.VISIBLE : View.GONE);
+
         }
     }
 
