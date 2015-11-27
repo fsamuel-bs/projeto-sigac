@@ -5,4 +5,8 @@
     <item name="app_background" type="color">#E1E1E1</item>
     <item name="key_label" type="color">#838383</item>
     <item name="value_label" type="color">#343434</item>
-</resources>
+    <item name="safe_victim_bg" type="color">#663FA329</item>
+    <item name="injured_victim_bg" type="color">#66C6CA00</item>
+    <item name="severe_victim_bg" type="color">#66E74C3C</item>
+    <item name="dead_victim_bg" type="color">#66000000</item>
+</resources>å

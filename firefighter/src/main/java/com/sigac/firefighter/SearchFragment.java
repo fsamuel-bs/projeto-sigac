@@ -222,8 +222,19 @@ public class SearchFragment extends Fragment {
             VictimItem item = getItem(position);
             viewHolder.textView.setCompoundDrawablesWithIntrinsicBounds(item.drawableId, 0, 0, 0);
             viewHolder.textView.setText(item.name);
-            viewHolder.container.setVisibility((item.active) ? View.VISIBLE : View.GONE);
-            return (item.active) ? view : null;
+
+            if (item.victim != null && item.victim.getStatus() != null) {
+                int color = 0x00000000;
+                switch (item.victim.getStatus()) {
+                    case GREEN: color = getResources().getColor(R.color.safe_victim_bg); break;
+                    case YELLOW: color = getResources().getColor(R.color.injured_victim_bg); break;
+                    case RED: color = getResources().getColor(R.color.severe_victim_bg); break;
+                    case BLACK: color = getResources().getColor(R.color.dead_victim_bg); break;
+                }
+                viewHolder.container.setBackgroundColor(color);
+            }
+
+            return view;
         }
     }
 
