@@ -180,7 +180,6 @@ public class ScreeningFragment extends Fragment {
                 clear();
             }
         });
-
     }
 
     private void clear() {

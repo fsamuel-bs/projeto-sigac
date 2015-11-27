@@ -1,9 +1,9 @@
 package com.sigac.firefighter.model;
 
+import android.os.Environment;
 import android.util.Log;
 import com.google.common.base.Throwables;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.sigac.firefighter.Victim;
 import org.json.JSONException;
@@ -15,12 +15,12 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
-import java.nio.CharBuffer;
 import java.util.List;
 
 public class ApiModelManager extends BaseModelManager {
 
-    final static String StationPath = "http://192.168.1.2:1880/";
+    static String STATION_PATH;
+    final static String IP_ADDRESS_FILE = "ip.txt";
 
     private static class InstanceHolder {
         private static final ApiModelManager INSTANCE = new ApiModelManager();
@@ -31,20 +31,63 @@ public class ApiModelManager extends BaseModelManager {
     }
 
     private ApiModelManager() {
-       /* Prevents outside instantiation */
+        /* Prevents outside instantiation */
+        String ipAddress = readIpFile();
+
+        if (ipAddress == null || ipAddress.equals("")) {
+            STATION_PATH = "http://192.168.1.2:1880/";
+            writeIpFile(STATION_PATH);
+        } else {
+            STATION_PATH = ipAddress;
+        }
+    }
+
+    private String readIpFile() {
+        String ipAddress = null;
+
+        File sdcard = Environment.getExternalStorageDirectory();
+        File file = new File(sdcard, IP_ADDRESS_FILE);
+        StringBuilder sb = new StringBuilder();
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            String line;
+
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+                sb.append('\n');
+            }
+            br.close();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        ipAddress = sb.toString();
+        return ipAddress;
+    }
+
+    private void writeIpFile(String ipAddress) {
+        try {
+            File sdcard = Environment.getExternalStorageDirectory();
+            File file = new File(sdcard, IP_ADDRESS_FILE);
+            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            bw.write(ipAddress.toCharArray());
+            bw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void deleteVictim(String id) {
-        postQuery(StationPath, "delete", null);
+        postQuery(STATION_PATH, "delete", null);
         notifyObservers();
     }
 
     @Override
     public List<Victim> getVictims() throws Exception  {
-        String payload = getQuery(StationPath, "victims");
-        Log.e("VICTIMS", payload);
-
+        String payload = getQuery(STATION_PATH, "victims");
         Gson gson = new Gson();
         Type listType = new TypeToken<List<Victim>>(){}.getType();
         List<Victim> victims = gson.fromJson(payload, listType);
@@ -54,7 +97,7 @@ public class ApiModelManager extends BaseModelManager {
 
     @Override
     public String getTag() {
-        String responseJson = getQuery(StationPath, "gettag");
+        String responseJson = getQuery(STATION_PATH, "gettag");
 
         if (responseJson == null || responseJson.isEmpty()) {
             return "";
@@ -73,11 +116,10 @@ public class ApiModelManager extends BaseModelManager {
         return null;
     }
 
-
     @Override
     public void persistVictim(Victim victim) {
         String victimObject = new Gson().<Victim>toJson(victim);
-        postQuery(StationPath, "victim", victimObject);
+        postQuery(STATION_PATH, "victim", victimObject);
         notifyObservers();
     }
 
